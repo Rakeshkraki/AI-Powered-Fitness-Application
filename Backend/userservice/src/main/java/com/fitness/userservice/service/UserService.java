@@ -25,7 +25,7 @@ public class UserService {
         User user = new User();
         user.setEmail(registerRequest.getEmail());
         user.setPassword(registerRequest.getPassword());
-        user.setFirstName(registerRequest.getFirsName());
+        user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
 
         User savedUser = userRepository.save(user);
@@ -41,9 +41,7 @@ public class UserService {
     }
 
     public UserResponse getUserProfile(String userId) {
-        
         User foundUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
-
         return new UserResponse(
                 foundUser.getId(),
                 foundUser.getEmail(),

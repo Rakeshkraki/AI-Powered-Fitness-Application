@@ -17,7 +17,7 @@ public class RegisterRequest {
 
     @NotBlank
     @Size(min = 3, message = "First Name must contain atleast 3 characters")
-    private String firsName;
+    private String firstName;
     private String lastName;
 
     public String getEmail() {
@@ -36,12 +36,12 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setFirstName(String firsName) {
+        this.firstName = firsName;
     }
 
     public String getLastName() {
