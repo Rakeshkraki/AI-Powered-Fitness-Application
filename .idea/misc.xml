@@ -11,6 +11,7 @@
       <list>
         <option value="$PROJECT_DIR$/Backend/userservice/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/activityservice/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/eureka/pom.xml" />
       </list>
     </option>
   </component>
