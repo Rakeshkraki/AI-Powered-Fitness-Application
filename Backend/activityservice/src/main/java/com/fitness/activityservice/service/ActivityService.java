@@ -4,7 +4,11 @@ import com.fitness.activityservice.dto.ActivityRequest;
 import com.fitness.activityservice.dto.ActivityResponse;
 import com.fitness.activityservice.model.Activity;
 import com.fitness.activityservice.repository.ActivityRepository;
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ActivityService {
@@ -46,4 +50,12 @@ public class ActivityService {
     }
 
 
+    public List<ActivityResponse> getUserActivities(String userId) {
+
+        List<Activity> activities = activityRepository.findByUserId(userId);
+        return activities.stream()
+                .map(this::mapSavedActivity)
+                .collect(Collectors.toList());
+    }
 }
+ 
