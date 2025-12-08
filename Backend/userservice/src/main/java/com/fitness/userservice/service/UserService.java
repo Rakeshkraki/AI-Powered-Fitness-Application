@@ -7,6 +7,7 @@ import com.fitness.userservice.repository.UserRepository;
 import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,5 +54,24 @@ public class UserService {
 
         );
         
+    }
+
+    public List<UserResponse> getAllUsers(){
+        List<User> userList =  userRepository.findAll();
+
+        return userList.stream()
+                .map(foundUser -> new UserResponse(
+                        foundUser.getId(),
+                        foundUser.getEmail(),
+                        foundUser.getPassword(),
+                        foundUser.getFirstName(),
+                        foundUser.getLastName(),
+                        foundUser.getCreatedAt(),
+                        foundUser.getUpdatedAt()
+                )).toList();
+    }
+
+    public Boolean existByUserId(String id) {
+        return userRepository.existsById(id);
     }
 }

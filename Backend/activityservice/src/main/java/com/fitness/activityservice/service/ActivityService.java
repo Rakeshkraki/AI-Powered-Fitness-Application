@@ -4,6 +4,7 @@ import com.fitness.activityservice.dto.ActivityRequest;
 import com.fitness.activityservice.dto.ActivityResponse;
 import com.fitness.activityservice.model.Activity;
 import com.fitness.activityservice.repository.ActivityRepository;
+import org.apache.catalina.User;
 import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,21 @@ import java.util.stream.Collectors;
 public class ActivityService {
 
     public final ActivityRepository activityRepository;
+    private final UserValidationService userValidationService;
 
-    public ActivityService(ActivityRepository activityRepository) {
+
+    public ActivityService(ActivityRepository activityRepository, UserValidationService userValidationService){
         this.activityRepository = activityRepository;
+        this.userValidationService = userValidationService;
     }
 
     public ActivityResponse crateActivity(ActivityRequest activityRequest) {
+
+        boolean isValidUser = userValidationService.validateUser(activityRequest.getUserId());
+
+        if(!isValidUser){
+            throw new RuntimeException("Invalid user :" + activityRequest.getUserId());
+        }
 
         Activity activity = new Activity();
         activity.setUserId(activityRequest.getUserId());
